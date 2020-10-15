@@ -1,2 +1,4 @@
-include ':app'
+include ':data'
+include ':daomain'
+include ':presentation'
 rootProject.name = "IStore"
