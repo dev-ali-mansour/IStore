@@ -1,4 +1,4 @@
-package dev.alimansour.istore
+package dev.alimansour.istore.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.annotation.SuppressLint
@@ -9,6 +9,7 @@ import android.view.View
 import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.TextView
+import dev.alimansour.istore.R
 
 /**
  * An example full-screen activity that shows and hides the system UI (i.e.
