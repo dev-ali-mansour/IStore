@@ -10,14 +10,14 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#0099cc">
+        android:background="@color/IStore_theme">
 
         <TextView
             android:id="@+id/textView2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="IStore"
-            android:textColor="#33b5e5"
+            android:textColor="@color/IStore_white"
             android:textSize="50sp"
             android:textStyle="bold"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"

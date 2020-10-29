@@ -1,22 +1,19 @@
 package dev.alimansour.istore.auth.ui.login
 
-import android.content.Intent
 import androidx.fragment.app.Fragment
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.*
+import android.widget.TextView
+import android.widget.Toast
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
-import androidx.navigation.fragment.findNavController
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import dev.alimansour.istore.R
-import dev.alimansour.istore.ui.HostActivity
 import kotlinx.android.synthetic.main.fragment_login.*
-
 
 
 class LoginFragment : Fragment(), View.OnClickListener {
@@ -24,12 +21,14 @@ class LoginFragment : Fragment(), View.OnClickListener {
     private lateinit var mAuthListener : FirebaseAuth.AuthStateListener
     private val  TAG = "HostActivity"
     var navController:NavController? = null
+    private val mLinkTextView : Int = R.id.link_signup
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
 
         return inflater.inflate(R.layout.fragment_login, container, false)
     }
@@ -39,19 +38,13 @@ class LoginFragment : Fragment(), View.OnClickListener {
 
         navController = Navigation.findNavController(view)
 
-        view.findViewById<TextView>(R.id.link_signup).setOnClickListener{
-            navController!!.navigate(R.id.action_loginFragment_to_signUpFragment)
-        }
+        view.findViewById<TextView>(R.id.link_signup).setOnClickListener(this)
         view.findViewById<TextView>(R.id.btn_login).setOnClickListener(this)
-
-        setUpFireBase()
 
         signInUser()
 
-
-}
-
-
+        checkAuthState()
+    }
     /*
     --------------------------------------FIREBASE--------------------------------
      */
@@ -75,9 +68,7 @@ class LoginFragment : Fragment(), View.OnClickListener {
         }
 
 
-        view?.findViewById<TextView>(R.id.link_signup)?.setOnClickListener {
-            Navigation.createNavigateOnClickListener(R.id.action_loginFragment_to_signUpFragment, null)
-        }
+
     }
 
 private fun loginUser( email: String, password: String) {
@@ -88,6 +79,10 @@ private fun loginUser( email: String, password: String) {
             if (task.isSuccessful) {
                 // Sign in success, update UI with the signed-in user's information
                 Log.d(TAG, "signInWithEmail:success")
+                Toast.makeText(
+                    activity, "Authentication success.",
+                    Toast.LENGTH_SHORT
+                ).show()
                 val user: FirebaseUser? = mAuth.currentUser
 
 
@@ -106,7 +101,8 @@ private fun loginUser( email: String, password: String) {
 
 }
 
-private fun setUpFireBase() {
+    //check authState and allow access
+private fun checkAuthState() {
     mAuthListener = FirebaseAuth.AuthStateListener{
         val user = FirebaseAuth.getInstance().currentUser
         if (user !=null) {
@@ -123,11 +119,9 @@ private fun setUpFireBase() {
                     Toast.LENGTH_SHORT
                 ).show()
 
-                val intent = Intent(activity, HostActivity::class.java)
-                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-                activity?.startActivity(intent)
-                activity?.overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
-                activity?.finish()
+                  //navigate to home fragment
+                navController?.navigate(R.id.action_loginFragment_to_homeFragment)
+
 
             }else{
                 Toast.makeText(
@@ -189,9 +183,9 @@ override fun onStop() {
 
             }
 
-        }
+      }
 
-    }
+   }
 
 
 }
