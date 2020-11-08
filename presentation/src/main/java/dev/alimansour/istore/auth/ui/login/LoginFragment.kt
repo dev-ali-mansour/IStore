@@ -1,13 +1,14 @@
 package dev.alimansour.istore.auth.ui.login
 
-import androidx.fragment.app.Fragment
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.WindowManager
 import android.widget.TextView
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import com.google.firebase.auth.FirebaseAuth
@@ -43,7 +44,7 @@ class LoginFragment : Fragment(), View.OnClickListener {
 
         signInUser()
 
-        checkAuthState()
+//        checkAuthState()
     }
     /*
     --------------------------------------FIREBASE--------------------------------
@@ -65,6 +66,8 @@ class LoginFragment : Fragment(), View.OnClickListener {
                 )
 
             }
+           hideSoftKeyboard()
+
         }
 
 
@@ -85,7 +88,8 @@ private fun loginUser( email: String, password: String) {
                 ).show()
                 val user: FirebaseUser? = mAuth.currentUser
 
-
+                //navigate to home fragment
+                navController?.navigate(R.id.action_loginFragment_to_homeFragment)
 
                 //updateUI(user)
             } else {
@@ -157,7 +161,7 @@ override fun onStart() {
 //        if (currentUser != null){
 //            startActivity(Intent(this))
 //        }
-    FirebaseAuth.getInstance().addAuthStateListener(mAuthListener)
+//    FirebaseAuth.getInstance().addAuthStateListener(mAuthListener)
 
 
 }
@@ -165,9 +169,9 @@ override fun onStart() {
 override fun onStop() {
     super.onStop()
 
-    if (mAuthListener != null) {
-        FirebaseAuth.getInstance().removeAuthStateListener { mAuthListener }
-    }
+//    if (mAuthListener != null) {
+//        FirebaseAuth.getInstance().removeAuthStateListener { mAuthListener }
+//    }
 }
 
     override fun onClick(view: View?) {
@@ -186,6 +190,10 @@ override fun onStop() {
       }
 
    }
+
+    private fun hideSoftKeyboard() {
+        activity?.window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN)
+    }
 
 
 }

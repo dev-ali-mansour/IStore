@@ -9,10 +9,10 @@ package dev.alimansour.istore.daomain.model
  */
 data class Product(
     private val id: Int,
-    private val title: String,
-    private val categoryId: Int,
-    private val description: String,
-    private val image: String,
-    private val price: Double,
+     val title: String,
+     private val categoryId: Int,
+      val description: String,
+    val image: String,
+    val price: Double,
     private val quantity: Int
 )

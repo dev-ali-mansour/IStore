@@ -96,7 +96,7 @@ class SignUpFragment : Fragment(), OnClickListener {
                     )
 
                     //send email verification
-                    sendVerificationEmail()
+//                    sendVerificationEmail()
                     FirebaseAuth.getInstance().signOut()
 
                     //redirect the user to the login screen

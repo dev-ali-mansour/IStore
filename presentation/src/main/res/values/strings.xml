@@ -27,4 +27,13 @@
 
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="_25_99">product_def_price</string>
+    <string name="most_popular">Most Popular</string>
+    <string name="total">Total</string>
+    <string name="pay_now">pay</string>
+    <string name="home_string">Home</string>
+    <string name="log_out">Log Out</string>
+    <string name="x">X</string>
+    <string name="versage">Versage</string>
+    <string name="perfume">Perfume</string>
 </resources>
